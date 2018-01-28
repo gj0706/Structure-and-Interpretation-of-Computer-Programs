@@ -91,7 +91,7 @@ def accumulate(combiner, base, n, term):
     if n == 0:
         return base
     else: 
-        return combiner(combiner(base, term(n)),accumulate(combiner, base, n-1, term))
+        return combiner(base,accumulate(combiner, base, n-1, term))
 # Recursive solution
     # if n == 0:
     #     return base
@@ -166,9 +166,17 @@ def filtered_accumulate(combiner, base, pred, n, term):
     """
     def combine_if(x, y):
         "*** YOUR CODE HERE ***"
-
+        if pred(n):
+            return combiner(x, y)
     return accumulate(combine_if, base, n, term)
-
+    
+#答案
+# def combine_if(x, y):
+#         if pred(y):
+#             return combiner(x, y)
+#         else:
+#             return x
+#     return accumulate(combine_if, base, n, term)
 def odd(x):
     return x % 2 == 1
 
