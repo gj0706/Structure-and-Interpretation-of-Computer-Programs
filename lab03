@@ -94,7 +94,7 @@ def hailstone(n):
     #     return 1 + hailstone(3 * n + 1)
 
     #答案2
-#     # Alternate solution with helper function
+# Alternate solution with helper function
 # def hailstone2(n):
 #     def hail_helper(n, count):
 #     print(n)
@@ -108,4 +108,4 @@ def hailstone(n):
 #     return hail_helper(n, 1)
 
 
-# print(hailstone(10))
+# print(hailstone(10)) 
