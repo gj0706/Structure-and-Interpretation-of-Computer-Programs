@@ -68,7 +68,6 @@ def g(n):
     else:
         return g(n-1) + 2 * g(n-2) + 3 * g(n-3)
 
-
 def g_iter(n):
     """Return the value of G(n), computed iteratively.
 
@@ -89,13 +88,22 @@ def g_iter(n):
     "*** YOUR CODE HERE ***"
     if n <= 3:
         return n
-    else:
-        while n > 3:
-            n = (n-1) + 2*(n-2) +3*(n-3)
-            n -= 1;
-        return n
+    g1, g2, g3 = 1, 2, 3
+    while n > 3: 
+        g4 = g3 + 2*g2 + 3*g1
+        g1, g2, g3 = g2, g3, g4
+        n -= 1;
+    return g3
+ #       
+ # if n == 1 or n == 2 or n == 3:
+ #        return n
+ #    a, b, c = 1, 2, 3
+ #    while n > 3:
+ #        a, b, c = b, c, c + 2*b + 3*a
+ #        n = n - 1
+ #    return c
 
-print(g_iter(4)) 
+print(g_iter(5)) 
 
 def pingpong(n):
     """Return the nth element of the ping-pong sequence.
@@ -128,7 +136,15 @@ def pingpong(n):
     >>> check(HW_SOURCE_FILE, 'pingpong', ['Assign', 'AugAssign'])
     True
     """
-   
+    "*** YOUR CODE HERE ***"
+    def count(total, i, direction):
+        if i == n:
+            return total
+        if has_seven(i) or i % 7 == 0:
+            return counter(total - direction, i + 1, direction * -1)
+        return count(total + direction, i + 1, direction)
+    return counter(1, 1, 1)
+
 
 def has_seven(k):
     """Returns True if at least one of the digits of k is a 7, False otherwise.
@@ -165,21 +181,17 @@ def count_change(amount):
     >>> count_change(100)
     9828
     """
-    
-
-###################
-# Extra Questions #
-###################
-
-from operator import sub, mul
-
-def make_anonymous_factorial():
-    """Return the value of an expression that computes factorial.
-
-    >>> make_anonymous_factorial()(5)
-    120
-    >>> from construct_check import check
-    >>> check(HW_SOURCE_FILE, 'make_anonymous_factorial', ['Assign', 'AugAssign', 'FunctionDef', 'Recursion'])
-    True
-    """
-    return 'YOUR_EXPRESSION_HERE'
+    def higest_two(i):
+        if i > amount:
+            return i // 2
+        return higest_two(i * 2)
+    def partition(amount, k):
+        if amount == 0:
+            return 1
+        elif amount < 0:
+            return 0
+        elif k == 0:
+            return 0
+        else:
+            return partition(amount - k, k) + partition(amount, k//2)
+    return partition(amount, highest_two(1))
