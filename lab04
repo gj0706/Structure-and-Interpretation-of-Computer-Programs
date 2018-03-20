@@ -72,6 +72,7 @@ def distance(city1, city2):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    return sqrt((get_lat(city1)-get_lat(city2))**2 + (get_lon(city1)-get_lon(city2))**2)
 
 # Q5
 def closer_city(lat, lon, city1, city2):
@@ -89,6 +90,14 @@ def closer_city(lat, lon, city1, city2):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    tempcity = make_city('tempcity', lat, lon)
+    if distance(tempcity, city1) > distance(tempcity, city2):
+        return get_name(city2)
+    else:
+        return get_name(city1)
+
+
+
 
 # Connect N: Q6-11
 ######################
@@ -103,8 +112,8 @@ def create_row(size):
     ['-', '-', '-', '-', '-']
     """
     "*** YOUR CODE HERE ***"
-    return _______
-
+    return ['-' for i in range(size)]
+print( create_row(5))
 
 def create_board(rows, columns):
     """Returns a board with the given dimensions.
@@ -113,7 +122,9 @@ def create_board(rows, columns):
     [['-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-'], ['-', '-', '-', '-', '-']]
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return [create_row(columns) for i in range(rows)]
+
+print(create_board(3, 5))
 
 
 def replace_elem(lst, index, elem):
@@ -129,8 +140,9 @@ def replace_elem(lst, index, elem):
     """
     assert index >= 0 and index < len(lst), 'Index is out of bounds'
     "*** YOUR CODE HERE ***"
-    return _______
+    return lst[:index] + [elem] + lst[(index + 1):] #没想出来
 
+print(replace_elem([1,2,3,4,5,6,7], 2, 8))
 
 def get_piece(board, row, column):
     """Returns the piece at location (row, column) in the board.
@@ -145,7 +157,7 @@ def get_piece(board, row, column):
     '-'
     """
     "*** YOUR CODE HERE ***"
-    return _______
+    return board[row][column]
 
 
 def put_piece(board, max_rows, column, player):
@@ -169,7 +181,7 @@ def put_piece(board, max_rows, column, player):
     -1
     """
     "*** YOUR CODE HERE ***"
-
+     
 
 def make_move(board, max_rows, max_cols, col, player):
     """Put player's piece in column COL of the board, if it is a valid move.
